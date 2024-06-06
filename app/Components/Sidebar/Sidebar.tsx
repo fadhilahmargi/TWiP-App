@@ -1,15 +1,14 @@
 "use client";
-import React from "react";
-import styled from "styled-components";
 import { useGlobalState } from "@/app/context/globalProvider";
 import Image from "next/image";
+import styled from "styled-components";
 
+import { arrowLeft, bars, logout } from "@/app/utils/Icons";
 import menu from "@/app/utils/menu";
+import { UserButton, useClerk, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import Button from "../Button/Button";
-import { arrowLeft, bars, logout } from "@/app/utils/Icons";
-import { UserButton, useClerk, useUser } from "@clerk/nextjs";
 
 function Sidebar() {
   const { theme, collapsed, collapseMenu } = useGlobalState();
@@ -35,6 +34,12 @@ function Sidebar() {
       <button className="toggle-nav" onClick={collapseMenu}>
         {collapsed ? bars : arrowLeft}
       </button>
+      <div className="app-header text-center">
+        <h2 className="app-name text-center">
+          <img src="logo.png" alt="TWiP-App Logo" className="app-logo" />
+          TWiP-App
+        </h2>
+      </div>
       <div className="profile">
         <div className="profile-overlay"></div>
         <div className="image">
@@ -143,10 +148,35 @@ const SidebarStyled = styled.nav<{ collapsed: boolean }>`
     }
   }
 
+  .app-header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  }
+
+  .app-name {
+    font-size: 1.5rem;
+    color: #ffffff;
+    font-weight: bold;
+    margin-top: 16px;
+    margin-bottom: 0;
+  }
+
+  .app-logo {
+  display: block;
+  margin: 0 auto;
+  width: 70x; 
+  height: 70px; 
+  margin: center; 
+  }
+
   .profile {
-    margin: 1.5rem;
+    margin-top: -0.5rem;
     padding: 1rem 0.8rem;
     position: relative;
+    display: inline-block;
+    vertical-align: top;
 
     border-radius: 1rem;
     cursor: pointer;
